@@ -9,7 +9,7 @@ output: html_document
 library(tibble)
 library(dplyr)
 
-setwd("C:/Users/drewc/Documents/healthy_neighborhoods/data")
+setwd("C:/Users/drewc/Documents/healthy_neighborhoods/acs")
 
 Social <- read.csv("ACS_17_5YR_DP02_with_ann.csv")
 Economic <- read.csv("ACS_17_5YR_DP03_with_ann.csv")
