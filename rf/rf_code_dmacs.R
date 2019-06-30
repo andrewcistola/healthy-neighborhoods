@@ -45,4 +45,15 @@ back <- stepAIC(fit, direction="backward")
 
 final <- data.frame(summary(back)$coefficients)
 
-write.csv(final, file = "C:/Users/drewc/Documents/healthy_neighborhoods/rf/rf_results_final.csv") #sort coefficients in excel
+colnames(final) <- c("Estimate", "Std.Error", "t", "Pr.t")
+finalcoef = final$Estimate
+finalcoef = finalcoef[-1] 
+
+finalvars = rownames(final)
+finalvars = finalvars[-1] 
+finalvars = c("With a Computer", "With Income from Earnings", "College Educated", "With a Disability", "85 Years and Over", "62 Years and Over", "Born in U.S.", "Not in Labor Force with Public Coverage", "Householder in Household", "Not in Labor Force", "Nonfamily Households", "English Only Households", "Households with Children", "Housing Value $50,000 to $99,999", "With Social Security", "Householder Living Alone", "Married Females", "Family Households", "Males Widowed", "65 and Over Households")                                      
+
+
+barplot(finalcoef, names.arg = finalvars, main = "Social Variables Assocaited with Diabetets Mortality", xlab = "Coefficient in Final Fit Model", col = "blue", las = 1, horiz = TRUE)
+
+write.csv(final, file = "C:/Users/drewc/Documents/healthy_neighborhoods/rf/rf_results_dmacs.csv")
