@@ -1,15 +1,15 @@
 ## Code Prep
 
-setwd("C:/Users/drewc/Documents/healthy_neighborhoods")
+setwd("C:/Users/drewc/Documents/GitHub/healthy_neighborhoods")
 
 library(dplyr)
 library(randomForest)
 library(MASS)
 library(reshape)
 
-## Random Forest
+rf = read.csv("rf/rf_data_dmacs.csv")
 
-rf = read.csv("rf/rf_master_dmacs.csv")
+## Random Forest
 
 rf$Tract <- NULL
 
@@ -53,7 +53,11 @@ finalvars = rownames(final)
 finalvars = finalvars[-1] 
 finalvars = c("With a Computer", "With Income from Earnings", "College Educated", "With a Disability", "85 Years and Over", "62 Years and Over", "Born in U.S.", "Not in Labor Force with Public Coverage", "Householder in Household", "Not in Labor Force", "Nonfamily Households", "English Only Households", "Households with Children", "Housing Value $50,000 to $99,999", "With Social Security", "Householder Living Alone", "Married Females", "Family Households", "Males Widowed", "65 and Over Households")                                      
 
-
 barplot(finalcoef, names.arg = finalvars, main = "Social Variables Assocaited with Diabetets Mortality", xlab = "Coefficient in Final Fit Model", col = "blue", las = 1, horiz = TRUE)
 
-write.csv(final, file = "C:/Users/drewc/Documents/healthy_neighborhoods/rf/rf_results_dmacs.csv")
+## Conduct Linear Regression on Variable of Choice and Health Outcome
+
+model = lm(Percent..EDUCATIONAL.ATTAINMENT...Percent.bachelor.s.degree.or.higher ~ Diabetes, data = rf)
+
+summary(model)
+
