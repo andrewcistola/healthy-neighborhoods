@@ -1,0 +1,28 @@
+                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:               Diabetes   R-squared (uncentered):                   0.787
+Model:                            OLS   Adj. R-squared (uncentered):              0.787
+Method:                 Least Squares   F-statistic:                              1927.
+Date:                Sun, 06 Oct 2019   Prob (F-statistic):                        0.00
+Time:                        18:01:36   Log-Likelihood:                         -9142.1
+No. Observations:                2614   AIC:                                  1.829e+04
+Df Residuals:                    2609   BIC:                                  1.832e+04
+Df Model:                           5                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================================================================================================================================================================================
+                                                                                                                                                                                 coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Percent..DISABILITY.STATUS.OF.THE.CIVILIAN.NONINSTITUTIONALIZED.POPULATION...Total.Civilian.Noninstitutionalized.Population...With.a.disability                                0.5637      0.043     13.021      0.000       0.479       0.649
+Percent..MARITAL.STATUS...Females.15.years.and.over...Widowed                                                                                                                  0.4632      0.040     11.529      0.000       0.384       0.542
+Percent..EDUCATIONAL.ATTAINMENT...Population.25.years.and.over...Graduate.or.professional.degree                                                                              -0.0944      0.028     -3.319      0.001      -0.150      -0.039
+Percent..VEHICLES.AVAILABLE...Occupied.housing.units...2.vehicles.available                                                                                                   -0.0516      0.012     -4.293      0.000      -0.075      -0.028
+Percent..HEALTH.INSURANCE.COVERAGE...Civilian.noninstitutionalized.population.19.to.64.years...Not.in.labor.force....With.health.insurance.coverage...With.public.coverage     0.1220      0.012     10.356      0.000       0.099       0.145
+==============================================================================
+Omnibus:                     1194.415   Durbin-Watson:                   1.642
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            21283.498
+Skew:                           1.712   Prob(JB):                         0.00
+Kurtosis:                      16.553   Cond. No.                         19.5
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
