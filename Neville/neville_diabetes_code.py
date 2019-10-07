@@ -130,7 +130,7 @@ result = model.summary() # Create Summary of final model
 print(result) # Print result to verify
 
 ## Write Summary to Text File
-text_file = open("Neville/neville_diabetes_results.txt", "w") # Open text file and name with subproject, content, and result suffix
+text_file = open("Neville/neville_diabetes_results.txt", "a") # Open text file and name with subproject, content, and result suffix
 text_file.write(str(result)) # write string version of summary result
 text_file.close() # Close file
 
