@@ -1,5 +1,5 @@
 #### Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
-### Neville Subproject: Using Random Forestes, Factor Analysis, and Stepwise Regression Modeling to screen variables
+### Neville Subproject: Using Random Forestes, Factor Analysis, and Recursive Feature Selection to Screen Variables for Imapcts on Public Health
 ## Florida Charts Diabetes Mortality by Census Tract: Pyhton Computing Language Code Script by DrewC!
 
 ### Section 1: Import Libraries, Import Dataset, Prepare for Classification

@@ -30,7 +30,7 @@ df_ms.info() # Get class, memory, and column info: names, data types, obs.
 df_ra = pd.merge(df_gen, df_re, on = "FacilityID", how = "right")
 
 ## Subset by Florida and Myocardial Infarction
-df_np = df_ra[(df_ra["Ownership"].str.contains("Non-Profit", na = False))]
+df_np = df_ra[(df_ra["Ownership"].str.contains("Voluntary", na = False))]
 df_fl = df_np[(df_np["State"].str.contains("FL", na = False))]
 df_co = df_fl.groupby(["County"], as_index = False).mean() #### Group data By Columns and Sum
 df_err = df_co.drop(columns = ["FacilityID", "ZIP"]) # Drop Unwanted Columns
@@ -42,14 +42,14 @@ df_err.head()
 ### Step 3: MSPB Data
 
 ## Join ERR and General Hospital Data
-df_ra = pd.merge(df_gen, df_ms, on = "FacilityID", how = "inner")
+df_pb = pd.merge(df_gen, df_ms, on = "FacilityID", how = "inner")
 
 ## Subset by Florida and Non-Profit
-df_np = df_ra[(df_ra["Ownership"].str.contains("Non-Profit", na = False))]
+df_np = df_pb[(df_pb["Ownership"].str.contains("Voluntary", na = False))]
 df_fl = df_np[(df_np["State"].str.contains("FL", na = False))]
 
 ## Group by COunty and Clean
-df_co = df_co.groupby(["County"], as_index = False).mean() #### Group data By Columns and Sum
+df_co = df_fl.groupby(["County"], as_index = False).mean() #### Group data By Columns and Sum
 df_mspb = df_co.drop(columns = ["FacilityID", "ZIP"]) # Drop Unwanted Columns
 
 ## Verify
@@ -63,6 +63,3 @@ df_value = pd.merge(df_err, df_mspb, on = "County", how = "inner")
 
 ## Export
 df_value.to_csv(r"_data/mungos_np_value.csv") # Clean in excel and select variable
-
-### Scratch Pad
-df_cvd = df_fl[(df_fl["Measure"].str.contains(r"AMI|HF"))]

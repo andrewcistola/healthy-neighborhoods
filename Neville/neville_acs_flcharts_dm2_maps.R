@@ -1,10 +1,15 @@
-## Prep Code
+#### Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+### Neville Subproject: Using Random Forestes, Factor Analysis, and Recursive Feature Selection to Screen Variables for Imapcts on Public Health
+## Florida Charts Census Tract Mortality Data: The R Project for Statistical Computing Code Script by DrewC!
 
-setwd("C:/Users/drewc/Documents/healthy_neighborhoods")
+### Step 1: Import Libraries and Import Dataset
 
+library(tidverse)
 library(tigris)
 library(leaflet)
 library(mapview)
+
+setwd("C:/Users/drewc/Documents/healthy_neighborhoods")
 
 # Get FL Census Tract Map
 

@@ -11,7 +11,7 @@ import numpy as np # Inclduded in every code script DC!
 import scipy as sp  # Incldued in every code script for DC!
 
 ## Import Datasets
-os.chdir("C:/Users/drewc/GitHub/HNB") # Set wd to project repository
+os.chdir("C:/Users/drewc/GitHub/HNB") # Set wd to project repository 
 df_1 = pd.read_csv("_data/flcharts_50_stage.csv") # Import dataset from _data folder
 df_2 = pd.read_csv("_data/acs_tract_stage.csv", low_memory = False) # Import dataset from _data folder
 

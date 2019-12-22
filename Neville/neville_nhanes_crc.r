@@ -1,0 +1,176 @@
+#### Hope Score Project: Using the YRBSS to predict youth suicide ideation
+### Risk Score Development: Using Variable Classification SYstems to Build Regression Models and Risk Scores
+## CDC Youth Behavioral Risk Surveillance Survey: Code Script by DrewC!
+
+#### Section A: Prepare Code
+
+### Step 1: Import Libraries and Import Dataset
+
+## Open R Terminal
+R # open R in VS Code (any terminal)
+library(skimr) # Library used for easy summary of data
+
+## Import Standard Libraries
+library(tidyverse)
+library(skimr)
+
+## Import Machine Learning Libraries
+library(randomForest) # Popular random forest package for R
+
+## Import Statistics Libraries
+library(MASS) # Stepwise inclusion model with linear and logistic options
+library(pROC) # ROC tests with AUC output
+library(psych) # Survey analysis library with factor analysis
+library(GPArotation) # Rotation options for factor analysis
+
+## Import Data
+setwd("C:/Users/drewc/GitHub/Hope") # Set wd to project repository
+df_yrbs = read.csv("_data/yrbs_2017_N_stage.csv") # Import dataset from _data folder
+skim(df_yrbs) # Descritive statistics, dimensions, and missing values
+
+### Step 2: Prepare Data for Classificaiton
+
+## Resolve missing data
+df_yrbs = subset(df_yrbs, select = -c(qn10, qn11, qn21, qn22, qn28, qn29, qn45)) # Remove variables with high missing values
+df_yrbs = na.omit(df_yrbs) # Omit rows with NA from Data Frame
+df_yrbs[df_yrbs == 2] = 0 # Change all "No" Responses of 2 to 0
+
+## Subset for outcome of interest
+df_yrbs$outcome <- 0 # Add new outcome column and set value to 0
+df_yrbs$outcome[df_yrbs$qn26 == 1 | df_yrbs$qn27 == 1] <- 1 # Create new column based on conditions
+df_plan = subset(df_yrbs, select = -c(qn26, qn27)) # Remove outcome and variables similar to the outcome
+
+## Verify Data
+head(df_plan) # Mini table with top 5 observations
+dim(df_plan) # Dimensions of data frame
+
+#### Section B: Vairable Selection using Quantitative and Qualitative Methods
+
+### Step 3: Conduct Factor Analysis to Identify Latent Variables
+
+## Subset by group with outcome
+df_fa = subset(df_plan, outcome == "1") # Subset for outcome of interest
+df_fa = subset(df_fa, select = -(outcome)) # Remove outcome variable
+nrow(df_fa) # Check number of rows
+
+## Perform Scree test and loadings
+model_scree = fa.parallel(df_fa) # Create scree plot to determine number of latent variables
+print(model_scree)
+
+## Write Factor Analysis Output to File
+result = model_scree # Save result df to variable
+file = file("risk_yrbs_rf_factor_log_auc_results.txt") # Open result file in subproject repository
+open(file, "w") # Open file and "a" to append
+write("Eigenvalues from Factor Analysis",  file) # Insert title
+write(" ", file) # Insert space below title
+capture.output(result, file = file, append = TRUE) # write summary to file
+write(" ", file) # Insert space below result
+close(file) # Close file
+
+### Step 4: Use a Random Forest to rank variables by importance 
+
+## Create a Random Forest
+forest = randomForest(formula = outcome ~ ., data = df_plan, ntree = 1000, importance = TRUE) # This will take time
+summary(forest) # Summary of forest model
+
+## Tidy Results for Variable Classification
+mat_forest = round(importance(forest), 2) # Round importance outcomes to two places,
+df_forest = as.data.frame(mat_forest) # Save as data frame
+df_forest = rownames_to_column(df_forest)
+colnames(df_forest) <- c("Variable", "MSE", "Gini") # Change column names to easily readible. Both values correspond to the summed increse in either Mean Squared Error or Gini as the variable is removed. Both are important and used elsewhere in randomforests (Scikit-learn). 
+skim(df_forest) # Descritive statistics, dimensions, and missing values
+
+## Create Importance Variable Lists
+df_rank = df_forest[which(df_forest$MSE > 8.37 & df_forest$Gini > 9.26), ] # Save all variables with importance value above column average
+df_rank = arrange(df_rank, desc(MSE, Gini)) # Descend by variable in data frame
+print(df_rank) # Print output
+
+## Write Random Forest Output to File
+result = print(df_rank) # Save result df to variable
+file = file("risk_yrbs_rf_factor_log_auc_results.txt") # Open result file in subproject repository
+open(file, "a") # Open file and "w" to overwrite
+write("Random Forest Variable Classification", file) # Insert title
+write(" ", file) # Insert space below title
+write.table(result, file, quote = FALSE, sep = "   ") # write table of values to filee
+write(" ", file) # Insert space below result
+close(file) # Close file
+
+## Create list of variables for input
+df_quant = df_rank["Variable"]
+char_qual = c("qn13", "qn20", "qn24", "qn25", "qn46", "qn47", "qn50", "qn52", "qn58", "qn59", "qn69")
+df_qual["Variable"] = char_qual
+df_vars = merge(df_quant, df_qual, by = "Variable", all.x = TRUE, all.y = TRUE) # Merge data frames by column, keeping all of X
+paste(df_vars$Variable, collapse = " + ") # Paste + into variable string for Mixed-Method variables combing both above lists
+
+## Write Variable Selection Output to File
+result1 = print(char_qual) # Save result df to variable
+result2 = print(paste(df_vars$Variable, collapse = " + ")) # Save result df to variable
+file = file("risk_yrbs_rf_factor_log_auc_results.txt") # Open result file in subproject repository
+open(file, "a") # Open file and "w" to overwrite
+write("Qualitative variables Selected", file) # Insert space below title
+capture.output(result1, file = file, append = TRUE) # write summary to file
+write(" ", file) # Insert space below title
+write("Mixed Method Variable Selection Results", file) # Insert title
+capture.output(result2, file = file, append = TRUE) # write summary to file
+write(" ", file) # Insert space below title
+close(file) # Close file
+
+#### Section C: Build Regression Model and Risk Score for Validation 
+
+### Step 5: Logistic Regression with Stepwise Selection for Final Model
+
+## Create training and validation set
+sample = sample.int(n = nrow(df_plan), size = floor(.50*nrow(df_plan)), replace = F) # Create training and testing dataset with 50% split
+train = df_plan[sample, ] # Susbset data frame by sample
+test = df_plan[-sample, ] # Subset data frame by removing sample
+
+## Perform Logisitc Regression on selected variables
+model_logistic = glm(outcome ~ qn13 + qn19 + qn20 + qn23 + qn24 + qn25 + qn40 + qn46 + qn47 + qn50 + qn52 + qn56 + qn58 + qn59 + qn68 + qn69, data = train)
+summary(model_logistic)
+
+## Stepwise backward selection
+model_back = stepAIC(model_logistic, direction = "backward") # Stepwise backwards selection on model
+summary(model_back) # Output model summary and check for variables to remove for final model
+qn13 + qn19 + qn20 + qn23 + qn24 + qn25 + qn50 + qn56 + qn68 # Remove variables not included or signficiant in stepwise
+
+## Final Model and AUC Score
+model_final = glm(outcome~ qn13 + qn19 + qn20 + qn23 + qn24 + qn25 + qn50 + qn56 + qn68, data = train) # Perform logistic regression model on selected variables on test data
+roc_train = roc(model_final$y, model_final$fitted.values, ci = T, plot = T) # Perform ROC test on test data
+auc(roc_test) # Print AUC score
+
+## Write Quantitative Selection Model Output to File
+result1 = print(summary(model_back)) # Save result df to variable
+result2 = print(summary(model_final)) # Save result df to variable
+result3 = print(auc(roc_train)) # Save result df to variable
+file = file("risk_yrbs_rf_factor_log_auc_results.txt") # Open result file in subproject repository
+open(file, "a") # Open file and "a" to append
+write("Backwards Stepwise Logistic Regression Model", file) # Insert space below title
+write(" ", file) # Insert space below title
+write("Final Model for Risk Score", file) # Insert space below title
+write(" ", file) # Insert space below title
+write("Training Model", file) # Insert space below title
+capture.output(result3, file = file, append = TRUE) # write summary to file
+write(" ", file) # Insert space below title
+close(file) # Close file
+
+### Step 5: Logistic Regression with Stepwise Selection for Final Model
+
+## Develop Risk Score Variable
+
+# Create new column based on conditions
+test$hope <- 0 # Add new outcome column and set value to 0
+test$hope <- 3.5*test$qn25 + 1.25*test$qn13 + test$qn19 + 1.5*test$qn20 + test$qn23 + test$qn50 + 0.75*test$qn68 + 0.75*test$qn56 + 0.5*test$qn24 
+
+## Final Model and AUC Score
+model_test = glm(outcome~ hope, data = test) # Perform logistic regression model on selected variables on test data
+roc_test = roc(model_test$y, model_test$fitted.values, ci = T, plot = T) # Perform ROC test on test data
+auc(roc_test) # Print AUC score
+
+## Write Quantitative Selection Model Output to File
+result = print(auc(roc_test)) # Save result df to variable
+file = file("risk_yrbs_rf_factor_log_auc_results.txt") # Open result file in subproject repository
+open(file, "a") # Open file and "a" to append
+write("Hope Score Validation", file) # Insert space below title
+capture.output(result, file = file, append = TRUE) # write summary to file
+write(" ", file) # Insert space below title
+close(file) # Close file
