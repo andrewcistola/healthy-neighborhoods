@@ -1,4 +1,4 @@
-### The Healthy Neighborhoods Project: Using Open Data and Public Programs to Improve Community Health
+# The Healthy Neighborhoods Project: Using Open Data and Public Programs to Improve Community Health
 Mission: Improve daily living for the members of our communities with open access public health data and neighborhood based public health programs. 
 Vision: Neighborhood based healthcare delivery in our communities where everyone benefits, no one is excluded, and is sustainable for the next generation. 
 
@@ -7,7 +7,7 @@ An assembly of open access data sources that provide social, economic and enviro
 The library consists of collected tables that connect the different data sources by the geographic identifier for a given year range. These tables are able to be analyzed using basic machine learning variable reduction techniques to develop models for informing further research, to inform evidence based screening methods, and to create risk assessment instruments.  
 The library is designed to partner with a practioner in the community to answer questions specific to their community and provide tools deployable in their context. 
 
-# Neville Longbottom Subproject: Using Random Forestes, Factor Analysis, and Recursive Feature Selection to Screen Variables for Imapcts on Public Health
+### Neville Longbottom Subproject: Using Random Forestes, Factor Analysis, and Recursive Feature Selection to Screen Variables for Imapcts on Public Health
 Using random forests, factor analysis, social media sourced qualitative analysis, and recursive feature selection to reduce variables among a dataset with more than 100 variables, this project is focused on creating a method of identifying underlying possible causes of health outcomes. Validation is conducted with linear regression or logistic regression accompanied by an ROC test.
 
 *Detecting Youth Suicide Ideation
@@ -21,13 +21,13 @@ A demonstration is conducted using the NHANES dataset to identify a subpopulatio
 *Diabetes Disease Progression in Florida
 WONDER 2013-2017 + EPA/USDA/ACS 2013-2017 (FL Counties), FLCharts 2013-2017 + ACS 2013-2017 (FL Census Tracts)
 
-# Cedric Diggory Subproject: 
+### Cedric Diggory Subproject: 
 Using measures of inequity in economics, this project uses the Lorenz curve and the Gini coefficient to evaluate the concentration of poor health in neighborhoods among a market or community. Similarly, this measure can be used to identify what policies or infastructure is related to lower or higher equity. A methodology for practical use is demonstrated with the CDC 500 Cities dataset.
 
 *Diabetes Hospitalizations
 500 Ciities 2013-2017 (FL MSA)
 
-# Bellatrix Lestrange Subproject: 
+### Bellatrix Lestrange Subproject: 
 Using value based reimbursement measures for hospital based providers from CMS, this project integrates processes from the neville and and cedric metholdogies to identify predictors for ways to improve value based reimbursements using public health programs.
 
 *Diabetes Inequity and ERR 
