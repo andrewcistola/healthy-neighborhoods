@@ -1,4 +1,6 @@
-# The Healthy Neighborhoods Project: Using Open Data and Public Programs to Improve Community Health
+# The Healthy Neighborhoods Project
+## *Using Open Data and Public Programs to Improve Community Health
+
 Mission: Improve daily living for the members of our communities with open access public health data and neighborhood based public health programs. 
 Vision: Neighborhood based healthcare delivery in our communities where everyone benefits, no one is excluded, and is sustainable for the next generation. 
 
