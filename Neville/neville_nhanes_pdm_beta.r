@@ -1,6 +1,7 @@
-#### Hope Score Project: Using the YRBSS to predict youth suicide ideation
-### Risk Score Development: Using Variable Classification SYstems to Build Regression Models and Risk Scores
-## CDC Youth Behavioral Risk Surveillance Survey: Code Script by DrewC!
+#### Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+### Neville Subproject: Using Random Forestes, Factor Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+## National Health and Nutrition Examination Survey: The R Project for Statistical Computing Script by DrewC!
+# Detecting Prediabetes in those under 65
 
 #### Section A: Prepare Code
 
@@ -23,7 +24,7 @@ library(psych) # Survey analysis library with factor analysis
 library(GPArotation) # Rotation options for factor analysis
 
 ## Import Data
-setwd("C:/Users/drewc/GitHub/HNB") # Set wd to project repository
+setwd("C:/Users/drewc/GitHub/Healthy_Neighborhoods") # Set wd to project repository
 df_nhanes = read.csv("_data/nhanes_1516_noRX_stage.csv") # Import dataset from _data folder
 
 ## Verify
@@ -33,13 +34,14 @@ dim(df_nhanes)
 
 ## Subset for outcome of interest
 df_nhanes$outcome <- 0 # Add new outcome column and set value to 0
-df_nhanes$outcome[df_nhanes$DIQ010 != 1 & df_nhanes$LBXGH >= 5.7 & df_nhanes$LBXGH < 6.4 ] <- 1 # Create new column based on conditions
-df_nh = subset(df_nh, select = -c(SEQN, LBXGH, DIQ010))
+df_nhanes$outcome[df_nhanes$LBXGH >= 5.7 & df_nhanes$LBXGH < 6.4 ] <- 1 # Create new column based on conditions
+df_nh = subset(df_nhanes, select = -c(SEQN, LBXGH, DIQ010))
 
 ## Resolve missing data
 df_nev = df_nh[, -which(colSums(is.na(df_nh)) > 3646)] # Remove variables with high missing values
 df_nev = subset(df_nev, select = -c(AUATYMTL, SLQ300, SLQ310, AUATYMTR)) # Remove variables with factor value types
 df_nev = na.omit(df_nev) # Omit rows with NA from Data Frame
+df_nev = df_nev[which(df_nev$RIDAGEYR > 65), ]
 
 ## Verify 
 dim(df_nev)
@@ -63,7 +65,7 @@ print(model_scree)
 
 ## Write Scree Test Output to File
 result = model_scree # Save result df to variable
-file = file("neville/neville_nhanes_pdm_results.txt") # Open result file in subproject repository
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
 open(file, "w") # Open file and "a" to append
 write("Factor Analysis",  file) # Insert title
 write(" ", file) # Insert space below title
@@ -74,21 +76,21 @@ write(" ", file) # Insert space below result
 close(file) # Close file
 
 ## Idenitfy Loadings
-factors = fa(r = cor_fa, nfactors = 40)
+factors = fa(r = cor_fa, nfactors = 9)
 df_load = as.data.frame(unclass(factors$loadings))
-df_load = df_load[, which(apply(df_load, 2, max) > 0.9)] # Remove variables with high missing values
-colnames(df_load)
+df_ld = df_load[, which(apply(df_load, 2, max) > 0.5)] # Remove variables with high missing values
+colnames(df_ld)
 
-df_ld = subset(df_load, select = c(MR2, MR8, MR10, MR11, MR15, MR17, MR12, MR26))
-df_ld$factor1[df_ld$MR2 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor2[df_ld$MR8 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor3[df_ld$MR10 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor4[df_ld$MR11 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor5[df_ld$MR15 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor6[df_ld$MR17 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor7[df_ld$MR12 > 0.5] <- 1 # Create new column based on conditions
-df_ld$factor8[df_ld$MR26 > 0.5] <- 1 # Create new column based on conditions
-df_ld = subset(df_ld, select = -c(MR2, MR8, MR10, MR11, MR15, MR17, MR12, MR26))
+df_ld$factor1[df_ld$MR1 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor2[df_ld$MR2 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor3[df_ld$MR3 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor4[df_ld$MR4 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor5[df_ld$MR5 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor6[df_ld$MR6 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor7[df_ld$MR7 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor8[df_ld$MR8 > 0.5] <- 1 # Create new column based on conditions
+df_ld$factor9[df_ld$MR9 > 0.5] <- 1 # Create new column based on conditions
+df_ld = subset(df_ld, select = -c(MR1, MR2, MR3, MR4, MR5, MR6, MR7, MR8, MR9))
 
 df_f1 = subset(df_ld, factor1 == 1) # Subset for outcome of interest
 df_f1 = df_f1["factor1"]
@@ -106,9 +108,12 @@ df_f7 = subset(df_ld, factor7 == 1) # Subset for outcome of interest
 df_f7 = df_f7["factor7"]
 df_f8 = subset(df_ld, factor8 == 1) # Subset for outcome of interest
 df_f8 = df_f8["factor8"]
+df_f9 = subset(df_ld, factor9 == 1) # Subset for outcome of interest
+df_f9 = df_f9["factor9"]
+
 
 ## Write Scree Test Output to File
-file = file("neville/neville_nhanes_pdm_results.txt") # Open result file in subproject repository
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
 open(file, "a") # Open file and "a" to append
 write("Factor Loadings",  file) # Insert title
 write(" ", file) # Insert space below title
@@ -120,6 +125,8 @@ capture.output(df_f5, file = file, append = TRUE) # write summary to file
 capture.output(df_f6, file = file, append = TRUE) # write summary to file
 capture.output(df_f7, file = file, append = TRUE) # write summary to file
 capture.output(df_f8, file = file, append = TRUE) # write summary to file
+capture.output(df_f9, file = file, append = TRUE) # write summary to file
+capture.output(df_f10, file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
 close(file) # Close file
 
@@ -138,11 +145,12 @@ colnames(df_forest) <- c("Variable", "MSE", "Gini") # Change column names to eas
 
 ## Create Importance Variable Lists
 df_rank = arrange(df_forest, desc(Gini)) # Descend by variable in data frame
+df_rank = df_rank[which(df_rank$Gini > 0 & df_rank$MSE > 0), ]
 print(df_rank) # Print output
 
 ## Write Random Forest Output to File
 result = print(df_rank) # Save result df to variable
-file = file("neville/neville_nhanes_pdm_results.txt") # Open result file in subproject repository
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
 open(file, "a") # Open file and "w" to overwrite
 write("Random Forest Variable Classification", file) # Insert title
 write(" ", file) # Insert space below title
@@ -151,33 +159,40 @@ write(" ", file) # Insert space below result
 close(file) # Close file
 
 ### Summary Statistics of Model Variables
-file = file("neville/neville_nhanes_pdm_results.txt") # Open result file in subproject repository
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
 open(file, "a") # Open file and "w" to overwrite
 write("Summary of Model Variables", file) # Insert title
 write(" ", file) # Insert space below result
-write("BMXSAD1", file) # Insert space below title
-capture.output(summary(df_nev$BMXSAD1), file = file, append = TRUE) # write summary to file
+write("OHX19TC", file) # Insert space below title
+capture.output(summary(df_nev$OHX19TC), file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
-write("BPXSY1", file) # Insert space below title
-capture.output(summary(df_nev$BPXSY1), file = file, append = TRUE) # write summary to file
+write("BMDAVSAD", file) # Insert space below title
+capture.output(summary(df_nev$BMDAVSAD), file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
-write("LBXNEPCT", file) # Insert space below title
-capture.output(summary(df_nev$LBXNEPCT), file = file, append = TRUE) # write summary to file
+write("BMXHT", file) # Insert space below title
+capture.output(summary(df_nev$BMXHT), file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
-write("URDACT", file) # Insert space below title
-capture.output(summary(df_nev$URDACT), file = file, append = TRUE) # write summary to file
+write("PAQ715", file) # Insert space below title
+capture.output(summary(df_nev$PAQ715), file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
-write("HSQ510", file) # Insert space below title
-capture.output(summary(df_nev$HSQ510), file = file, append = TRUE) # write summary to file
+write("DMDHREDU", file) # Insert space below title
+capture.output(summary(df_nev$DMDHREDU), file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
-write("LBXSF3SI", file) # Insert space below title
-capture.output(summary(df_nev$LBXSF3SI), file = file, append = TRUE) # write summary to file
-write(" ", file) # Insert space below result
-write("CBD071", file) # Insert space below title
-capture.output(summary(df_nev$CBD071), file = file, append = TRUE) # write summary to file
-write(" ", file) # Insert space below result
-write("OHARNF", file) # Insert space below title
-capture.output(summary(df_nev$OHARNF), file = file, append = TRUE) # write summary to file
+close(file) # Close file
+
+### Step 5: Liner Regression to Determine Direction of Impact
+
+model_logistic <- glm(outcome~ OHX19TC + BMDAVSAD + BMXHT + PAQ715 + DMDHREDU, data = df_nev)
+summary(model_logistic)
+
+## Write Model Output to File
+result = summary(model_logistic) # Save result df to variable
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
+open(file, "a") # Open file and "a" to append
+write(" ", file) # Insert space below title
+write("First Logistic Regression for Variable Direction",  file) # Insert title
+write(" ", file) # Insert space below title
+capture.output(result, file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below result
 close(file) # Close file
 
@@ -186,25 +201,19 @@ close(file) # Close file
 ### Step 5: Create Dichotomous Variables Based on 3rd Quartile
 
 ## Create New Variables
-df_nh$SAD <- 0 # Add new outcome column and set value to 0
-df_nh$SYS <- 0 # Add new outcome column and set value to 0
-df_nh$NEU <- 0 # Add new outcome column and set value to 0
-df_nh$ACR <- 0 # Add new outcome column and set value to 0
-df_nh$STO <- 0 # Add new outcome column and set value to 0
-df_nh$FOL <- 0 # Add new outcome column and set value to 0
-df_nh$GRO <- 0 # Add new outcome column and set value to 0
-df_nh$ORL <- 0 # Add new outcome column and set value to 0
-df_nh$SAD[df_nh$BMXSAD1 > 25.6] <- 1 # Create new column based on conditions
-df_nh$SYS[df_nh$BPXSY1 > 130] <- 1 # Create new column based on conditions
-df_nh$NEU[df_nh$LBXNEPCT > 50.95] <- 1 # Create new column based on conditions
-df_nh$ACR[df_nh$URDACT > 4.64] <- 1 # Create new column based on conditions
-df_nh$STO[df_nh$HSQ510 == 1] <- 1 # Create new column based on conditions
-df_nh$FOL[df_nh$LBXSF3SI > 0.1410] <- 1 # Create new column based on conditions
-df_nh$GRO[df_nh$CBD071 > 526] <- 1 # Create new column based on conditions
-df_nh$ORL[df_nh$OHARNF != 0] <- 1 # Create new column based on conditions
+df_nh$V1 <- 0 # Add new outcome column and set value to 0
+df_nh$V2 <- 0 # Add new outcome column and set value to 0
+df_nh$V3 <- 0 # Add new outcome column and set value to 0
+df_nh$V4 <- 0 # Add new outcome column and set value to 0
+df_nh$V5 <- 0 # Add new outcome column and set value to 0
+df_nh$V1[df_nh$OHX01TC == 4 | df_nh$OHX02TC == 4 | df_nh$OHX03TC == 4 | df_nh$OHX04TC == 4 | df_nh$OHX05TC == 4 | df_nh$OHX06TC == 4 | df_nh$OHX07TC == 4 | df_nh$OHX08TC == 4 | df_nh$OHX09TC == 4 | df_nh$OHX10TC == 4 | df_nh$OHX11TC == 4 | df_nh$OHX12TC == 4 | df_nh$OHX13TC == 4 | df_nh$OHX14TC == 4 | df_nh$OHX15TC == 4 | df_nh$OHX16TC == 4 | df_nh$OHX17TC == 4 | df_nh$OHX18TC == 4 | df_nh$OHX19TC == 4 | df_nh$OHX20TC == 4 | df_nh$OHX21TC == 4 | df_nh$OHX22TC == 4 | df_nh$OHX23TC == 4 | df_nh$OHX24TC == 4 | df_nh$OHX25TC == 4 | df_nh$OHX26TC == 4 | df_nh$OHX27TC == 4 | df_nh$OHX28TC == 4 | df_nh$OHX29TC == 4 | df_nh$OHX30TC == 4 | df_nh$OHX31TC == 4 | df_nh$OHX32TC == 4] <- 1 # Create new column based on conditions
+df_nh$V2[df_nh$BMDAVSAD > 27.6] <- 1 # Create new column based on conditions
+df_nh$V3[df_nh$BMXHT < 157.1] <- 1 # Create new column based on conditions
+df_nh$V4[df_nh$PAQ715 == 8] <- 1 # Create new column based on conditions
+df_nh$V5[df_nh$DMDHREDU < 4] <- 1 # Create new column based on conditions
 
 ## Resolve missing data
-df_lon = subset(df_nh, select = c(outcome, SAD, SYS, NEU, ACR, STO, FOL, GRO, ORL)) # Remove variables with factor value types
+df_lon = subset(df_nh, select = c(outcome, V1, V2, V3, V4, V5)) # Remove variables with factor value types
 df_lon = na.omit(df_lon) # Omit rows with NA from Data Frame
 dim(df_lon)
 
@@ -216,7 +225,7 @@ train = df_lon[sample, ] # Susbset data frame by sample
 test = df_lon[-sample, ] # Subset data frame by removing sample
 
 ## Perform Logisitc Regression on selected variables
-model_logistic = glm(outcome ~ SAD + SYS + NEU + ACR + STO + FOL + GRO + ORL, data = train)
+model_logistic = glm(outcome~ V1 + V2 + V3 + V4 + V5, data = train)
 summary(model_logistic)
 
 ## Stepwise backward selection
@@ -226,9 +235,9 @@ summary(model_back) # Output model summary and check for variables to remove for
 ## Write Quantitative Selection Model Output to File
 result1 = print(summary(model_logistic)) # Save result df to variable
 result2 = print(summary(model_back)) # Save result df to variable
-file = file("neville/neville_nhanes_pdm_results.txt") # Open result file in subproject repository
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
 open(file, "a") # Open file and "a" to append
-write("Logistic Regression Model", file) # Insert space below title
+write("Training Logistic Regression Model", file) # Insert space below title
 write(" ", file) # Insert space below title
 capture.output(result, file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below title
@@ -242,9 +251,7 @@ close(file) # Close file
 
 # Create new column based on conditions
 test$score <- 0 # Add new outcome column and set value to 0
-test$score = (11*test$SAD) + (13*test$SYS) + (6*test$NEU) + (2*test$ACR) + (2*test$GRO) + (2*test$ORL) 
-df_nh$score <- 0
-df_nh$score = (11*df_nh$SAD) + (13*df_nh$SYS) + (6*df_nh$NEU) + (2*df_nh$ACR) + (2*df_nh$GRO) + (2*df_nh$ORL) 
+test$score = (8*test$V1) + (21*test$V2) + (7*test$V4)
 
 ## Final Model and AUC Score
 model_score = glm(outcome~ score, data = test) # Perform logistic regression model on selected variables on test data
@@ -253,7 +260,7 @@ auc(roc_test) # Print AUC score
 
 ## Write Quantitative Selection Model Output to File
 result = print(auc(roc_test)) # Save result df to variable
-file = file("neville/neville_nhanes_pdm_results.txt") # Open result file in subproject repository
+file = file("neville/neville_nhanes_pdm_over_results.txt") # Open result file in subproject repository
 open(file, "a") # Open file and "a" to append
 write("Risk Score Validation", file) # Insert space below title
 write(" ", file) # Insert space below title
@@ -261,46 +268,3 @@ capture.output(result, file = file, append = TRUE) # write summary to file
 write(" ", file) # Insert space below title
 close(file) # Close file
 
-### Step 9: Create Score with Simple Values and Non-Lab Tests
-
-## Create New Variables
-df_nh$SAD <- 0 # Add new outcome column and set value to 0
-df_nh$SYS <- 0 # Add new outcome column and set value to 0
-df_nh$STO <- 0 # Add new outcome column and set value to 0
-df_nh$GRO <- 0 # Add new outcome column and set value to 0
-df_nh$ORL <- 0 # Add new outcome column and set value to 0
-df_nh$SAD[df_nh$BMXSAD1 > 25.6] <- 1 # Create new column based on conditions
-df_nh$SYS[df_nh$BPXSY1 > 130] <- 1 # Create new column based on conditions
-df_nh$STO[df_nh$HSQ510 != 1] <- 1 # Create new column based on conditions
-df_nh$GRO[df_nh$CBD071 < 500] <- 1 # Create new column based on conditions
-df_nh$ORL[df_nh$OHARNF != 1] <- 1 # Create new column based on conditions
-
-## Resolve missing data
-df_lon = subset(df_nh, select = c(outcome, SAD, SYS, STO, GRO, ORL)) # Remove variables with factor value types
-df_lon = na.omit(df_lon) # Omit rows with NA from Data Frame
-dim(df_lon)
-
-## Create training and validation set
-sample = sample.int(n = nrow(df_lon), size = floor(.50*nrow(df_lon)), replace = F) # Create training and testing dataset with 50% split
-train = df_lon[sample, ] # Susbset data frame by sample
-test = df_lon[-sample, ] # Subset data frame by removing sample
-
-## Perform Logisitc Regression on selected variables
-model_logistic2 = glm(outcome ~ SAD + SYS + STO + GRO + ORL, data = train)
-summary(model_logistic2)
-
-# Create new column based on conditions
-test$score <- 0 # Add new outcome column and set value to 0
-test$score = (13*test$SAD) + (14*test$SYS) + (5*test$STO) + (3*test$GRO) + (2*test$ORL) 
-df_nh$score <- 0
-df_nh$score = (13*df_nh$SAD) + (14*df_nh$SYS) + (5*df_nh$STO) + (3*df_nh$GRO) + (29*df_nh$ORL)
-
-## Resolve missing data
-df_lon = subset(df_nh, select = c(outcome, SAD, SYS, STO, GRO, ORL)) # Remove variables with factor value types
-df_lon = na.omit(df_lon) # Omit rows with NA from Data Frame
-dim(df_lon)
-
-## Final Model and AUC Score
-model_score = glm(outcome~ score, data = test) # Perform logistic regression model on selected variables on test data
-roc_test = roc(model_score$y, model_score$fitted.values, ci = T, plot = T) # Perform ROC test on test data
-auc(roc_test) # Print AUC score

@@ -17,7 +17,7 @@ from sklearn.svm import SVR as svr # Linear model for RFE
 import statsmodels.api as sm # Multiple regression model
 
 ## Import Dataset
-os.chdir("C:/Users/drewc/GitHub/HNB") # Set wd to project repository
+os.chdir("C:/Users/drewc/GitHub/Healthy_Neighborhoods") # Set wd to project repository
 df_nev = pd.read_csv("_data/neville_dm2_acs.csv", encoding = "ISO-8859-1", low_memory= False) # Import dataset with outcome and ecological variable for each geographical id, all datasets in _data folder in repository
 
 ## Verify

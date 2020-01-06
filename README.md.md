@@ -10,26 +10,28 @@ The library is designed to partner with a practioner in the community to answer 
 ## Neville Subproject: Using Random Forestes, Factor Analysis, and Recursive Feature Selection to Screen Variables for Imapcts on Public Health
 Using random forests, factor analysis, social media sourced qualitative analysis, and recursive feature selection to reduce variables among a dataset with more than 100 variables, this project is focused on creating a method of identifying underlying possible causes of health outcomes. Validation is conducted with linear regression or logistic regression accompanied by an ROC test.
 
-# National Health and Nutrition Examination Survey 2015-2016: Python Programming Langauge Code Script by DrewC!
-A demonstration is conducted using the NHANES dataset to identify a subpopulation for colorectal cancer research as well as predictors for teenage pre-diabetes. 
-
-# Youth Risk and Behavioral Surveillance Survey 2017: The R Projet for Statistical Computing Code Script by DrewC!
+# Detecting Youth Suicide Ideation
+YRBSS 2017 (US Youth)
 A second demonstration is conducted using the YRBSS to create a screening tool for negative weight perceptions among teenages as well as risk score for suicide ideation among students in school.
 
-## Cedric: 
+# Colorectal Cancer Research
+NHANES 2005-2006 (US Patients), WONDER 2013-2017 + EPA/USDA/ACS 2013-2017 (US Counties)
+A demonstration is conducted using the NHANES dataset to identify a subpopulation for colorectal cancer research as well as predictors for teenage pre-diabetes. 
+
+# Diabetes Disease Progression in Florida
+WONDER 2013-2017 + EPA/USDA/ACS 2013-2017 (FL Counties), FLCharts 2013-2017 + ACS 2013-2017 (FL Census Tracts)
+
+## Cedric Subproject: 
 Using measures of inequity in economics, this project uses the Lorenz curve and the Gini coefficient to evaluate the concentration of poor health in neighborhoods among a market or community. Similarly, this measure can be used to identify what policies or infastructure is related to lower or higher equity. A methodology for practical use is demonstrated with the CDC 500 Cities dataset.
 
-## Aberforth: 
-Using an interrupted time series methodology for evaluating the impact of public health programs as well as county level health predictors from the USDA, EPA, and ACS, this project is focused on providing an informed understanding of state level health policies designed to improve outcomes. This is demonstrated with maternal mortality rates from the WONDER dataset and Medicaid expansion under the ACA. 
+# Diabetes Hospitalizations
+500 Ciities 2013-2017 (FL MSA)
 
-## Bellatrix: 
-Using the processes in the neville and cedric subprojects, and data from FLCharts is combined with socioeconimc variables from the American Community Survey to understand the location and composition of diabetes related inequities in health. The focus will be to directly inform diabetes focused programs inside the DOH that are currently deployed in their communities. Partners: Kelsey Christiansen
+## Bellatrix Subproject: 
+Using value based reimbursement measures for hospital based providers from CMS, this project integrates processes from the neville and and cedric metholdogies to identify predictors for ways to improve value based reimbursements using public health programs.
 
-## Mungos: 
-Using value based reimbursement measures for hospital based providers from CMS, this project integrates processes from the neville and and cedric metholdogies to identify predictors for ways to improve value based reimbursements using public health programs. This project will be used to inform the Community Resource Paramedic Program inside Gainesville Fire Rescue. Partners: Lisa Chacko
-
-## Severus: 
-Using ACROS data from the Washington Post legal case, this projects seeks to identify the preliminary legal opioid distribution elements that led to higher rates of fentanyl related overdoses among states and counties. This project integrates the Aberforth methodlogy to evaluate policy impacts and Cedric methodology to incorporate inequity measures. Partners: Kelly Gurka
+# Diabetes Inequity and ERR 
+CMS 2018 ERR (US Hospitals), 500 Cities (US MSA) 
 
 ### The Neighborhood Data Residency: Evaluating the process and impact of grassroots, innovative, public health programs that already exist in our neighborhoods.
 In order to develop partnerships and integrate evidence from a wide variety of sources, students are recruited to participate in a program evaluation and data science focused residency housed within a community health program. They will be provided extra education on evaluation, community based participatory research, database management and data security, implementation theory, project management, research coordination, and coding for data science in Python and R. The students will also be setup to receive research coordination credentialing following the program. 
