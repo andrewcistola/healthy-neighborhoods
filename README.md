@@ -41,11 +41,11 @@ Using value based reimbursement measures for hospital based providers from CMS, 
 CMS 2018 ERR (US Hospitals), 500 Cities (US MSA) 
 
 ## The Neighborhood Data Residency: 
-#### *Evaluating the process and impact of grassroots, innovative, public health programs that already exist in our neighborhoods.*
+#### *Evaluate the process and impact of grassroots, innovative, public health programs that already exist in our neighborhoods.*
 In order to develop partnerships and integrate evidence from a wide variety of sources, students are recruited to participate in a program evaluation and data science focused residency housed within a community health program. They will be provided extra education on evaluation, community based participatory research, database management and data security, implementation theory, project management, research coordination, and coding for data science in Python and R. The students will also be setup to receive research coordination credentialing following the program. 
 The residency will house them inside a community program where they will conduct a process and outcome evaluation, assist in improving data collection and management, and help identify and apply for opportunities to gain external funding.The residency will integrate practicum based approaches to student development while maintaining a positive impact on the community programs. 
 
 ## The Neighborhood Policy Shop: 
-#### *Introducing community coalition health improvement policies that can bring development to our neighborhoods.*
+#### *Introduce community coalition health improvement policies that can bring development to our neighborhoods.*
 Informed by equity based measures in health economics, work with coalitions in our communities and among our neighborhoods to introduce grassroots health focused policies that bring development for everyone. 
 Identifying gaps, windows, and areas of consensus the shop will work with any and all parties to write samples for state and federal statutes and bring forward pertinent lawsuits that advocate for better community health. The focus will be on identifying voices in needs in the community that match gathered evidence and available openings for broadly desired change. 
