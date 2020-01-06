@@ -44,7 +44,7 @@ head(df_sum, 10)
 ## Create new column as sum of others
 df_fl$Vascular = df_fl$Heart.Diseases + df_fl$Cerebrovascular.Diseases +  df_fl$Essen.Hypertension...Hypertensive.Renal.Dis + df_fl$ Aortic.Aneurysm...Dissection + df_fl$Atherosclerosis  # Create new column based on conditions
 df_fl$Metabolic = df_fl$Diabetes.Mellitus + df_fl$Nephritis..Nephrotic.Syndrome..Nephrosis # Create new column based on conditions
-df_fl$Cancer = df_fl$In.Situ..Benign..Uncertain.and.Unknown.Behavior.Neoplasms + df_fl$Malignant.Neoplasm.or.Cancer
+df_fl$Cancer = df_fl$Malignant.Neoplasm.or.Cancer
 
 ## Gini coefficient
 gini_Metabolic = ineq(df_fl$Metabolic, type = "Gini")
