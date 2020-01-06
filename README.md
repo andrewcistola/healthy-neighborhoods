@@ -2,7 +2,7 @@
 ### *Using Open Data and Public Programs to Improve Community Health*
 
 ## Purpose:
-
+The Healthy Neighborhoods Project's goal is to improve community health through the use of open source data science tools and program evaluation to improve community based public health programs in Florida.
 ## Mission: 
 Improve daily living for the members of our communities and the public health programs that support them. 
 ## Vision: 
