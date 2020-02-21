@@ -1,20 +1,31 @@
 #### Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
 ### Neville Subproject: Using Random Forestes, Factor Analysis, and Recursive Feature Selection to Screen Variables for Imapcts on Public Health
-## Florida Charts Diabetes Mortality by Census Tract: Pyhton Computing Language Code Script by DrewC!
+## Florida Charts Diabetes Mortality by Census Tract: 2013-2017 Crude Diabetes Mortality Rates
+# Pyhton Computing Language Code Script by DrewC!
 
-### Section 1: Import Libraries, Import Dataset, Prepare for Classification
+#### Section 1: Import Libraries, Import Dataset, Prepare for Classification
+
+### Step 1: Import Libraries and Import Dataset
 
 ## Import Standard Libraries
 import os # Inlcuded in every script DC!
 import numpy as np # Inclduded in every code script DC!
 import pandas as pd # Incldued in every code script for DC!
+import scipy as sp # Incldued in every code script for DC!
 
-## Import Specific Libraries and Packages
-import sklearn.ensemble # SciKit Learn package contains many classification options beyond those used below
+## Import Statistics Packages
+from sklearn.linear_model import LogisticRegression # Logisitc Regression in Sklean
+from sklearn.metrics import roc_curve # ROC test
+from sklearn.metrics import roc_auc_score # AUC score
+
+## Import Machine Learning Libraries
 from sklearn.ensemble import RandomForestClassifier as rfc # Random Forest classification component
 from sklearn.feature_selection import RFE as rfe # Recursive Feature selection component
 from sklearn.svm import SVR as svr # Linear model for RFE
-import statsmodels.api as sm # Multiple regression model
+
+## Import Factor Analysis Packages
+from factor_analyzer import FactorAnalyzer as fa
+from factor_analyzer.factor_analyzer import calculate_kmo # Kaiser-Meyer-Olkin test package from Scikit-learn
 
 ## Import Dataset
 os.chdir("C:/Users/drewc/GitHub/Healthy_Neighborhoods") # Set wd to project repository
@@ -22,6 +33,9 @@ df_nev = pd.read_csv("_data/neville_dm2_acs.csv", encoding = "ISO-8859-1", low_m
 
 ## Verify
 df_nev.info()
+
+#### Section 2: Conduct Factor Analysis to Identify Latent Variables for Prediabetes SubCohort
+
 
 ### Section 2: Use Random Forest to Classify Ecological Variables by Contribution to Outcome
 

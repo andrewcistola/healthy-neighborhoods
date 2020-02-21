@@ -187,19 +187,27 @@ Top 10 Gini
 
 Association of Diabetes Inequity and MSPB
 
+Top 10 Counties by Inequality
+         County      Gini
+36         Leon 0.4221023
+50   Palm Beach 0.4197384
+28 Hillsborough 0.3863049
+6       Broward 0.3775896
+38      Liberty 0.3619017
+48       Orange 0.3587992
+1       Alachua 0.3580105
+43   Miami-Dade 0.3495806
+58     St Johns 0.3466369
+44       Monroe 0.3433436
 
-For Profit Hospitals
-
-	Spearman's rank correlation rho
+ Spearman's rank correlation rho
 
 data:  df_join2$Gini and df_join2$MSPB
 S = 28976, p-value = 0.002653
 alternative hypothesis: true rho is not equal to 0
 sample estimates:
-      rho 
-0.3667927 
-
-
+      rho
+0.3667927
 
 
 THE END

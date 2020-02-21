@@ -1,28 +1,84 @@
-                                 OLS Regression Results                                
-=======================================================================================
-Dep. Variable:               Diabetes   R-squared (uncentered):                   0.786
-Model:                            OLS   Adj. R-squared (uncentered):              0.786
-Method:                 Least Squares   F-statistic:                              1918.
-Date:                Mon, 07 Oct 2019   Prob (F-statistic):                        0.00
-Time:                        16:39:53   Log-Likelihood:                         -9147.1
-No. Observations:                2614   AIC:                                  1.830e+04
-Df Residuals:                    2609   BIC:                                  1.833e+04
-Df Model:                           5                                                  
-Covariance Type:            nonrobust                                                  
-==============================================================================================================================================================================================================================================
-                                                                                                                                                                                 coef    std err          t      P>|t|      [0.025      0.975]
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Percent..DISABILITY.STATUS.OF.THE.CIVILIAN.NONINSTITUTIONALIZED.POPULATION...Total.Civilian.Noninstitutionalized.Population...With.a.disability                                0.5432      0.043     12.664      0.000       0.459       0.627
-Percent..HEALTH.INSURANCE.COVERAGE...Civilian.noninstitutionalized.population.19.to.64.years...Not.in.labor.force....With.health.insurance.coverage...With.public.coverage     0.1127      0.011      9.855      0.000       0.090       0.135
-Percent..MARITAL.STATUS...Females.15.years.and.over...Widowed                                                                                                                  0.4634      0.040     11.498      0.000       0.384       0.542
-Percent..EDUCATIONAL.ATTAINMENT...Population.25.years.and.over...Graduate.or.professional.degree                                                                              -0.1376      0.025     -5.484      0.000      -0.187      -0.088
-Percent..INCOME.AND.BENEFITS..IN.2017.INFLATION.ADJUSTED.DOLLARS....Total.households....75.000.to..99.999                                                                     -0.0821      0.028     -2.884      0.004      -0.138      -0.026
-==============================================================================
-Omnibus:                     1223.415   Durbin-Watson:                   1.633
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):            22293.848
-Skew:                           1.761   Prob(JB):                         0.00
-Kurtosis:                      16.866   Cond. No.                         15.4
-==============================================================================
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Factor Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+## Florida Charts Diabetes Mortality by Census Tract: 2013-2017 Crude Diabetes Mortality Rates
+The Python Programming Langauge Script by DrewC!
 
-Warnings:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+Census Tracts in Florida with Mortality Data
+(4163, 413)
+Cohort subset for variable reduction
+(2614, 413)
+
+Principal Components Analysis
+
+
+Top 10 Variables by Eigenvector
+                                              Features  Eigenvectors
+69     Percent; SEX AND AGE - 18 years and over - Male      0.232822
+70      Percent; SEX AND AGE - Total population - Male      0.223369
+71   Percent; CITIZEN, VOTING AGE POPULATION - Citi...      0.215481
+399  Percent; SELECTED MONTHLY OWNER COSTS (SMOC) -...      0.157421
+376  Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...      0.153329
+374  Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...      0.150109
+409  Percent; VALUE - Owner-occupied units - $500,0...      0.148705
+83   Percent; RESIDENCE 1 YEAR AGO - Population 1 y...      0.146084
+82   Percent; UNITS IN STRUCTURE - Total housing un...      0.143958
+401  Percent; SELECTED MONTHLY OWNER COSTS (SMOC) -...      0.141846
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+                                              Features      Gini
+28   Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...  0.022099
+210  Percent; DISABILITY STATUS OF THE CIVILIAN NON...  0.021143
+197  Percent; HEALTH INSURANCE COVERAGE - Civilian ...  0.020404
+73   Percent; EMPLOYMENT STATUS - Population 16 yea...  0.015854
+202  Percent; HEALTH INSURANCE COVERAGE - Civilian ...  0.014996
+65   Percent; EMPLOYMENT STATUS - Population 16 yea...  0.014210
+10   Percent; COMPUTERS AND INTERNET USE - Total ho...  0.013885
+60   Percent; EMPLOYMENT STATUS - Population 16 yea...  0.012633
+224  Percent; DISABILITY STATUS OF THE CIVILIAN NON...  0.011964
+66   Percent; EMPLOYMENT STATUS - Population 16 yea...  0.011727
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+                                             Features
+0   Percent; DISABILITY STATUS OF THE CIVILIAN NON...
+4   Percent; EMPLOYMENT STATUS - Population 16 yea...
+7   Percent; EMPLOYMENT STATUS - Population 16 yea...
+21  Percent; EMPLOYMENT STATUS - Females 16 years ...
+28           Percent; SEX AND AGE - 65 years and over
+32  Percent; EMPLOYMENT STATUS - Females 16 years ...
+33  Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...
+34  Percent; YEAR HOUSEHOLDER MOVED INTO UNIT - Oc...
+35           Percent; SEX AND AGE - 62 years and over
+42  Percent; EDUCATIONAL ATTAINMENT - Population 2...
+43           Percent; SEX AND AGE - 85 years and over
+53  Percent; MARITAL STATUS - Males 15 years and o...
+55  Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...
+
+
+Regression Model
+
+Coefficient Scores
+                                             Question  Score
+3   Percent; EMPLOYMENT STATUS - Females 16 years ...   12.0
+8            Percent; SEX AND AGE - 62 years and over   10.4
+0   Percent; DISABILITY STATUS OF THE CIVILIAN NON...    9.4
+10           Percent; SEX AND AGE - 85 years and over    8.9
+2   Percent; EMPLOYMENT STATUS - Population 16 yea...    7.0
+11  Percent; MARITAL STATUS - Males 15 years and o...    6.7
+7   Percent; YEAR HOUSEHOLDER MOVED INTO UNIT - Oc...    6.5
+6   Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...    5.5
+9   Percent; EDUCATIONAL ATTAINMENT - Population 2...   -6.3
+1   Percent; EMPLOYMENT STATUS - Population 16 yea...   -8.8
+4            Percent; SEX AND AGE - 65 years and over   -9.2
+12  Percent; INCOME AND BENEFITS (IN 2017 INFLATIO...  -10.3
+5   Percent; EMPLOYMENT STATUS - Females 16 years ...  -12.3
+
+R sq = 0.7983932670237185
+
+THE END

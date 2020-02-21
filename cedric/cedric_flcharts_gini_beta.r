@@ -94,21 +94,25 @@ df_fl$Diabetes = df_fl$Diabetes.Mellitus + df_fl$Nephritis..Nephrotic.Syndrome..
 tib_gini = df_fl %>% group_by(County) %>% summarise(ineq(Diabetes, type = "Gini")) # Group By Columns and Average
 df_county = as.data.frame(tib_gini) # Convert tiblle to Data Frame
 colnames(df_county) <- c("County", "Gini") # Change Column Names
+df_county = df_county[order(-df_county$Gini),] # Sort df by column
 
 ## Join with County Value Measure 
 df_join2 = inner_join(df_county, df_cms, by = "County", how = "left") ## Join By Columns
-df_join2
+dim(df_join2)
 
 ## Spearman Rank
 corr_diabetes = cor.test(x = df_join2$Gini, y = df_join2$MSPB, method = "spearman") # Pearson's Rank for Q->Q
 
 ## Write Output to File
-text_1 = corr_diabetes
+text_1 = head(df_county, 10)
+text_2 = corr_diabetes
 file = file("cedric/cedric_flcharts_gini_results.txt") # Open result file in subproject repository
 open(file, "a") # Open file and "a" to append
-write("\n\nAssociation of Diabetes Inequity and MSPB\n",  file) # Insert title
-write("\nFor Profit Hospitals",  file) # Insert title
+write("\n\nAssociation of Diabetes Inequity and MSPB",  file) # Insert title
+write("\nTop 10 Counties by Inequality",  file) # Insert title
 capture.output(text_1, file = file, append = TRUE) # write summary to file
+write("\nFor Profit Hospitals",  file) # Insert title
+capture.output(text_2, file = file, append = TRUE) # write summary to file
 write("\n\n\nTHE END",  file) # Insert title
 close(file) # Close file
 

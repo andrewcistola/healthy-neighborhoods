@@ -43,14 +43,12 @@ df_hosp = pd.read_csv("_data/cms_hosp_value_join.csv") # Import dataset from _da
 ## Verify
 df_hosp.info() # Get class, memory, and column info: names, data types, obs.
 
-#### Subset by Outcome of Interest
+#### Subset by MSPB
+df_fl = df_hosp[(df_hosp["State"].str.contains("FL", na = False))]
 
-## Subset Non-Profit
-df_np = df_hosp[(df_hosp["Ownership"].str.contains("Voluntary", na = False))]
-df_pr = df_hosp[(df_hosp["Ownership"].str.contains("Proprietary", na = False))]
-
-## Subset by State
-df_fl = df_pr[(df_pr["State"].str.contains("FL", na = False))]
+## Subset Non-Profit or For-Profit
+df_fl = df_fl[(df_fl["Ownership"].str.contains("Voluntary", na = False))]
+df_fl = df_fl[(df_fl["Ownership"].str.contains("Proprietary", na = False))]
 
 ## Sort by Value
 df_value = df_fl.sort_values(by = ["MSPB"], ascending = False) # Sort Columns by Value
