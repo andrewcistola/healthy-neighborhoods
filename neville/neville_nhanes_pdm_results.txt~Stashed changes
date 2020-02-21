@@ -1,0 +1,99 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Factor Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2015-2016: Detecting different factors between individuals with a BMI over 30 and are between 40 and 70 that have pre-diabates and have diabetes
+The Python Programming Langauge Script by DrewC!
+
+
+NHANES At risk (40-70 & BMI >30) with Prediabetes or Diabetes
+(781, 1682)
+Cohort subset for variable reduction
+(781, 852)
+
+Principal Components Analysis
+
+
+Top 10 Variables by Eigenvector
+     Features  Eigenvectors
+17   LBDAPBSI      0.182790
+16     LBXAPB      0.182790
+306    LBXGLU      0.181092
+307  LBDGLUSI      0.181085
+642  LBDLDLSI      0.174489
+641    LBDLDL      0.174488
+369  PHAFSTHR      0.172878
+370  PHAFSTMN      0.151235
+68   AUXU500L      0.147400
+59   AUXU1K1R      0.146863
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+95     LBXSGL  0.044038
+96   LBDSGLSI  0.038783
+250    DIQ172  0.027627
+260   DID310S  0.024656
+251    DIQ180  0.023168
+248    DID040  0.022646
+257    DIQ275  0.021774
+259   DIQ300D  0.021663
+261   DID310D  0.021233
+256    DID260  0.021009
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+    Features
+1   LBDSGLSI
+2     DIQ172
+3     DIQ180
+5     DID260
+6     DIQ170
+7     DIQ360
+8     DIQ240
+9     DIQ230
+11    DIQ080
+14    DIQ070
+15  LBXSCLSI
+16  LBXSOSSI
+22  LBXSNASI
+23   LBXSKSI
+32    LBXSCA
+33  LBDSCASI
+44    LBXSUA
+54  INDFMPIR
+56  LBDSALSI
+73    LBXVBZ
+
+
+Regression Model
+
+Coefficient Scores
+    Question  Score
+0   LBDSGLSI   88.9
+14    LBXSCA   88.2
+19    LBXVBZ   79.3
+3     DID260   57.8
+13   LBXSKSI   51.6
+4     DIQ170   48.8
+8     DIQ080   45.5
+12  LBXSNASI   22.4
+15  LBDSCASI   22.1
+7     DIQ230   20.6
+5     DIQ360   12.0
+16    LBXSUA    8.5
+9     DIQ070    6.1
+17  INDFMPIR   -5.0
+18  LBDSALSI   -7.3
+10  LBXSCLSI  -10.7
+11  LBXSOSSI  -12.4
+6     DIQ240  -15.2
+1     DIQ172  -19.9
+2     DIQ180  -23.6
+
+R sq = 0.8501920614596671
+
+THE END
+

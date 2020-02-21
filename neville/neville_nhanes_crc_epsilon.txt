@@ -1,0 +1,102 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Principal Component Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2005-2006: Campylobacter Anitbodies and 10 Year Cancer Mortality
+The Python Programming Langauge Script by DrewC!
+
+Variables, Observations, Missing Values 
+
+Total Cohort
+(984, 3109)
+
+Subset Cohort
+(984, 839)
+
+Demographics
+        RIDAGEYR   RIAGENDR   RIDRETH1   INDHHINC   DMDEDUC2     SMQ020
+count  13.000000  13.000000  13.000000  13.000000  13.000000  13.000000
+mean   51.000000   1.307692   2.769231   6.153846   2.692308   1.307692
+std    12.301761   0.480384   1.300887   3.184498   1.315587   0.480384
+min    27.000000   1.000000   1.000000   1.000000   1.000000   1.000000
+25%    45.000000   1.000000   1.000000   5.000000   2.000000   1.000000
+50%    53.000000   1.000000   3.000000   6.000000   3.000000   1.000000
+75%    61.000000   2.000000   4.000000   9.000000   4.000000   2.000000
+max    64.000000   2.000000   4.000000  11.000000   5.000000   2.000000
+
+NA Ratio
+0.05156399895345795
+
+N outcome
+13
+
+Demographics
+13
+
+
+Principal Components Analysis
+
+Top 10 Variables by Component Meanings
+     Features  Meanings
+73   LBXSAPSI  0.134856
+809   VTQ270B  0.131803
+118  PEASCTM1  0.127608
+252    DPQ040  0.125171
+404    HSQ490  0.123645
+436   MCQ160F  0.123645
+283  DR2TACAR  0.120471
+140    URXETU  0.120165
+832    WHQ040  0.119046
+337    DR2TWS  0.118569
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+368    LBXHCY  0.010643
+330  DR2TP205  0.009966
+135    BPXSY3  0.009488
+411    HUQ010  0.009475
+634    URXMAD  0.009470
+332  DR2TP226  0.009052
+151  LBXLYPCT  0.008812
+16     LBXIGE  0.008607
+353    LBXRBF  0.008545
+156  LBDLYMNO  0.008438
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+     Features
+13    VTQ230A
+59   OHX03HTC
+65   LBXEOPCT
+92     BHQ040
+101  LBXMOPCT
+106  LBDWMELC
+169    LBXWCM
+174    LBXWBM
+192  OHX17HTC
+229  OHXFCLZ4
+243    DBQ700
+
+
+Regression Model
+
+Coefficient Scores
+    Variable  Score
+1   OHX03HTC  132.4
+0    VTQ230A   67.2
+2   LBXEOPCT   17.2
+7     LBXWBM   13.3
+9   OHXFCLZ4  -17.2
+6     LBXWCM  -21.5
+4   LBXMOPCT  -23.1
+3     BHQ040  -60.4
+8   OHX17HTC  -61.9
+10    DBQ700  -65.6
+5   LBDWMELC -106.2
+
+R sq = 0.9898373983739838
+
+THE END

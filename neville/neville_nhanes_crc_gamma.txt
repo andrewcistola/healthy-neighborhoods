@@ -1,0 +1,82 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Principal Component Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2005-2006: Campylobacter Anitbodies and 10 Year Cancer Mortality
+The Python Programming Langauge Script by DrewC!
+
+Variables, Observations, Missing Values 
+
+Total Cohort
+(10348, 3112)
+
+Subset Cohort
+(10348, 254)
+
+Demographics
+        RIDAGEYR   RIAGENDR   RIDRETH1   INDHHINC   DMDEDUC2     SMQ020  PERMTH_EXM
+count  17.000000  17.000000  17.000000  17.000000  17.000000  17.000000   17.000000
+mean   53.000000   1.294118   2.882353   5.705882   2.882353   1.235294   67.647059
+std    11.510864   0.469668   1.166316   3.015889   1.317306   0.437237   36.083135
+min    27.000000   1.000000   1.000000   1.000000   1.000000   1.000000    3.000000
+25%    48.000000   1.000000   3.000000   3.000000   2.000000   1.000000   41.000000
+50%    57.000000   1.000000   3.000000   6.000000   3.000000   1.000000   67.000000
+75%    61.000000   2.000000   4.000000   8.000000   4.000000   1.000000   88.000000
+max    64.000000   2.000000   4.000000  11.000000   5.000000   2.000000  125.000000
+
+NA Ratio
+0.13656486551473296
+
+N outcome
+17
+
+Demographics
+17
+
+
+Principal Components Analysis
+
+Top 10 Variables by Component Meanings
+     Features  Meanings
+129  DR2TCRYP  0.261762
+47   PEASCTM1  0.257811
+27     LBXF13  0.243458
+45     BMXSUB  0.242787
+181    DR2TWS  0.224414
+187  PHAFSTHR  0.206195
+205    LBXHBS  0.197779
+12   AADEXSTS  0.196752
+24   LBDII6LC  0.196225
+91   DMDHREDU  0.192988
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+13     LBXIGE  0.018473
+50   LBXLYPCT  0.017066
+191  LBDRBFSI  0.014694
+47   PEASCTM1  0.014466
+190    LBXRBF  0.014012
+60   LBXRBCSI  0.013960
+242    LBXBPB  0.013821
+243  LBDBPBSI  0.013440
+55   LBDLYMNO  0.012359
+44     BMXTRI  0.011372
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+    Features
+21  DR2TP226
+
+
+Regression Model
+
+Coefficient Scores
+   Variable  Score
+0  DR2TP226   76.1
+
+R sq = 0.9983571704677232
+
+THE END

@@ -1,0 +1,16 @@
+
+Principal Components Analysis
+
+Top 10 Variables by Component Meanings
+     Features  Meanings
+77   RIDAGEYR  0.214032
+78   RIDAGEMN  0.213494
+79   RIDAGEEX  0.213444
+94   SIAPROXY  0.203457
+38      BMXWT  0.199062
+42    BMXARMC  0.196551
+43   BMXWAIST  0.188878
+41    BMXARML  0.181535
+222   HSAQUEX  0.180150
+113  DR2TKCAL  0.180112
+

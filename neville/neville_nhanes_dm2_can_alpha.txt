@@ -1,0 +1,82 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Principal Component Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2005-2006: Type 2 Diabetes and 10 Year Cancer Mortality among at risk Po
+The Python Programming Langauge Script by DrewC!
+
+Variables, Observations, Missing Values 
+
+Total Cohort
+(10348, 3116)
+
+Subset Cohort
+(10348, 253)
+
+Demographics
+        RIDAGEYR   RIAGENDR   RIDRETH1   INDHHINC   DMDEDUC2     SMQ020  PERMTH_EXM
+count  28.000000  28.000000  28.000000  28.000000  28.000000  28.000000   28.000000
+mean   69.892857   1.285714   3.178571  15.178571   2.750000   1.392857   50.928571
+std    10.552652   0.460044   0.944911  27.311717   1.040833   0.497347   31.261062
+min    36.000000   1.000000   1.000000   2.000000   1.000000   1.000000    2.000000
+25%    64.000000   1.000000   3.000000   4.750000   2.000000   1.000000   26.500000
+50%    73.000000   1.000000   3.000000   6.000000   3.000000   1.000000   44.000000
+75%    76.000000   2.000000   4.000000   8.250000   3.000000   2.000000   66.250000
+max    84.000000   2.000000   5.000000  99.000000   5.000000   2.000000  123.000000
+
+NA Ratio
+0.13690373423823282
+
+N outcome
+28
+
+Demographics
+28
+
+
+Principal Components Analysis
+
+Top 10 Variables by Component Meanings
+     Features  Meanings
+207    HIQ210  0.305821
+7      AGQ180  0.271286
+235  OHAEXSTS  0.253660
+224    HUQ030  0.248267
+218    HSQ500  0.240205
+225    HUQ040  0.238461
+228    HUQ090  0.236596
+107    DR2DAY  0.236468
+210    HOD050  0.229914
+109  DR2MNRSP  0.228569
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+55   LBDLYMNO  0.024153
+78   RIDAGEMN  0.018759
+79   RIDAGEEX  0.018732
+49   LBXWBCSI  0.018695
+50   LBXLYPCT  0.018108
+52   LBXNEPCT  0.015577
+67   LBXPLTSI  0.015255
+241    LBXBPB  0.013496
+242  LBDBPBSI  0.013121
+251    LBXPLP  0.012884
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+   Features
+31   DIQ050
+
+
+Regression Model
+
+Coefficient Scores
+  Variable  Score
+0   DIQ050 -275.8
+
+R sq = 0.9972941631233089
+
+THE END

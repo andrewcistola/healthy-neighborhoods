@@ -1,0 +1,68 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Principal Component Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2005-2006: Campylobacter Anitbodies and 10 Year Cancer Mortality
+The Python Programming Langauge Script by DrewC!
+
+Variables, Observations, Missing Values 
+
+Total Cohort
+(10348, 3112)
+
+Subset Cohort
+(10348, 254)
+
+NA Ratio
+0.13656486551473296
+
+N outcome
+17
+
+
+Principal Components Analysis
+
+Top 10 Variables by Eigenvector
+     Features  Eigenvectors
+113  DR2TKCAL      0.180112
+146  DR2TPHOS      0.173416
+114  DR2TPROT      0.172146
+118  DR2TTFAT      0.169636
+164  DR2TS160      0.164864
+147  DR2TMAGN      0.164616
+120  DR2TMFAT      0.161267
+119  DR2TSFAT      0.160597
+152  DR2TPOTA      0.160176
+151  DR2TSODI      0.160164
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+13     LBXIGE  0.018912
+50   LBXLYPCT  0.017055
+47   PEASCTM1  0.014305
+191  LBDRBFSI  0.014199
+190    LBXRBF  0.014114
+242    LBXBPB  0.013916
+60   LBXRBCSI  0.013424
+243  LBDBPBSI  0.012867
+55   LBDLYMNO  0.012412
+44     BMXTRI  0.011040
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+   Features
+2  LBDLYMNO
+
+
+Regression Model
+
+Coefficient Scores
+   Variable  Score
+0  LBDLYMNO -106.2
+
+R sq = 0.9983571704677232
+
+THE END

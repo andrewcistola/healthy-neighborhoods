@@ -1,0 +1,119 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Principal Component Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2005-2006: Campylobacter Anitbodies and 10 Year Cancer Mortality
+The Python Programming Langauge Script by DrewC!
+
+Variables, Observations, Missing Values 
+
+Total Cohort
+(10348, 3110)
+
+Subset Cohort
+(10348, 254)
+
+Demographics
+        RIDAGEYR   RIAGENDR   RIDRETH1   INDHHINC
+count  17.000000  17.000000  17.000000  17.000000
+mean   53.000000   1.294118   2.882353   5.705882
+std    11.510864   0.469668   1.166316   3.015889
+min    27.000000   1.000000   1.000000   1.000000
+25%    48.000000   1.000000   3.000000   3.000000
+50%    57.000000   1.000000   3.000000   6.000000
+75%    61.000000   2.000000   4.000000   8.000000
+max    64.000000   2.000000   4.000000  11.000000
+
+NA Ratio
+0.13656486551473296
+
+N outcome
+17
+
+Demographics
+17
+
+
+Principal Components Analysis
+
+Top 10 Variables by Component Loadings
+     Features  Loadings
+49   LBXWBCSI  0.338291
+57    LBDNENO  0.305494
+104  DR2DRSTZ  0.290509
+128  DR2TBCAR  0.284099
+126  DR2TVARA  0.271565
+131    DR2TLZ  0.263658
+144    DR2TVK  0.250515
+107    DRDINT  0.244600
+125   DR2TRET  0.234114
+197     FSDHH  0.232492
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+13     LBXIGE  0.018612
+50   LBXLYPCT  0.016424
+47   PEASCTM1  0.014416
+190    LBXRBF  0.014280
+60   LBXRBCSI  0.013855
+191  LBDRBFSI  0.013793
+242    LBXBPB  0.013656
+243  LBDBPBSI  0.013222
+55   LBDLYMNO  0.012487
+44     BMXTRI  0.011172
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+    Features
+12  LBXMOPCT
+17    LBXBCD
+22  DR2TP226
+39  DR2TP205
+42  INDFMPIR
+48  DR2TS140
+58  DR2TS060
+60  DR2TM181
+66  DR2TS160
+68  DR2TMFAT
+
+
+Regression Model
+
+Coefficient Scores
+   Variable  Score
+2  DR2TP226   0.68
+1    LBXBCD   0.52
+5  DR2TS140   0.51
+3  DR2TP205   0.48
+6  DR2TS060   0.37
+9  DR2TMFAT   0.36
+4  INDFMPIR  -0.26
+8  DR2TS160  -0.29
+7  DR2TM181  -0.30
+0  LBXMOPCT  -0.47
+
+R sq = 0.9983571704677232
+
+THE END
+Regression Model
+(6924, 11)
+
+Coefficient Scores
+   Variable  Score
+2  DR2TP226   0.68
+5  DR2TS140   0.55
+3  DR2TP205   0.48
+1    LBXBCD   0.41
+6  DR2TS060   0.40
+9  DR2TMFAT   0.35
+4  INDFMPIR  -0.13
+7  DR2TM181  -0.28
+8  DR2TS160  -0.32
+0  LBXMOPCT  -0.51
+
+R sq = 0.9981224725592144
+
+THE END

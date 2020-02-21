@@ -1,0 +1,84 @@
+Healthy Neighborhoods Project: Using Ecological Data to Improve Community Health
+Neville Subproject: Using Random Forestes, Principal Component Analysis, and Logistic regression to Screen Variables for Imapcts on Public Health
+NHANES 2005-2006: Campylobacter Anitbodies and 10 Year Cancer Mortality
+The Python Programming Langauge Script by DrewC!
+
+Variables, Observations, Missing Values 
+
+Total Cohort
+(1022, 3110)
+
+Subset Cohort
+(1022, 835)
+
+Demographics
+       ACD010A  ACD010B  ACD010C  ...  DIABETES  HYPERTEN  outcome
+count     13.0      0.0      0.0  ...      17.0      17.0     17.0
+mean       1.0      NaN      NaN  ...       0.0       0.0      1.0
+std        0.0      NaN      NaN  ...       0.0       0.0      0.0
+min        1.0      NaN      NaN  ...       0.0       0.0      1.0
+25%        1.0      NaN      NaN  ...       0.0       0.0      1.0
+50%        1.0      NaN      NaN  ...       0.0       0.0      1.0
+75%        1.0      NaN      NaN  ...       0.0       0.0      1.0
+max        1.0      NaN      NaN  ...       0.0       0.0      1.0
+
+[8 rows x 3110 columns]
+
+NA Ratio
+0.04989160622004523
+
+N outcome
+17
+
+Demographics
+17
+
+
+Principal Components Analysis
+
+Top 10 Variables by Component Meanings
+     Features  Meanings
+285  DR2TCRYP  0.150749
+293    DR2TFA  0.139608
+73   LBXSAPSI  0.137907
+433   MCQ160C  0.137308
+267  DR2HELPD  0.137308
+116    BPQ060  0.136291
+729    LBXPLP  0.135099
+286  DR2TLYCO  0.134852
+583    SLQ150  0.134321
+515    URXOP2  0.134254
+
+
+Random Forest
+
+Top 10 Variables by Gini Rankings
+     Features      Gini
+151  LBXLYPCT  0.014564
+368    LBXHCY  0.011684
+16     LBXIGE  0.009922
+156  LBDLYMNO  0.009533
+332  DR2TP226  0.008781
+411    HUQ010  0.008644
+548  LBDBPBSI  0.008529
+330  DR2TP205  0.008014
+547    LBXBPB  0.007918
+565   LBXPT21  0.007838
+
+
+Recursive Feature Selection
+
+Selected Features by Cross-Validation
+    Features
+160   BHQ040
+
+
+Regression Model
+
+Coefficient Scores
+  Variable  Score
+0   BHQ040  -70.1
+
+R sq = 0.9833659491193738
+
+THE END
