@@ -1,7 +1,7 @@
 # Healthy Neighborhoods
 A collection of public data sources at sub-state geographic layers with informative information on public health outcomes. 
 
-## 2020 Data Release
+## 2020 Release
 The 2020 data release contains the following data sources at various levels. All metadata below applies to the `_staged` tables. Refer to specific documentation on the raw data. 
 
 ### US Census (USCensus) - American Community Survey (ACS)
