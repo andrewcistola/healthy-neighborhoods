@@ -1,6 +1,9 @@
 # Healthy Neighborhoods
 A collection of public data sources at sub-state geographic layers with informative information on public health outcomes. 
 
+## About this Repository
+For many public health research studies, data needs to be collected from a variety of public sources and the process can consume much of the research project. The Healthy Neighbrohoods Repository is an assembly of open access data from public sources that provide social, economic and environmental data below the state level The library consists of collected tables that connect the different data sources by the geographic identifier for a given year range. These tables are able to be analyzed using basic machine learning variable reduction techniques to develop models for informing further research, to inform evidence based screening methods, and to create risk assessment instruments.
+
 ## 2020 Release
 The 2020 data release contains data from the following sources:<br>
 <br>
