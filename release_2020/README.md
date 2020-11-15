@@ -46,6 +46,7 @@ Filename: `cms_2020_FIPS_staged.csv`
 `BEA` Code and raw data for BEA<br>
 `CMS` Code and raw data for CMS<br>
 `SHAPE` Shape and crosswalk files for standard geographies and labels<br>
+`_raw` Collected raw data not yet prepared for the current release<br>
 `acs_5Y2018_ZCTA_staged.csv` ACS file ready for use<br>
 `fldoh_5Y2018_ZCTA_staged.csv` FLV file ready for use<br>
 `ahrf_5Y2018_FIPS_staged.csv` AHRF file ready for use<br>
