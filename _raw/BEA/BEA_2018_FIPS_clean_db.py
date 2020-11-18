@@ -137,6 +137,9 @@ df_CAINC.to_csv(r"hnb/BEA/2018/CAINC/BEA_2018_CAINC_full.csv") # Export df as cs
 
 ## Create full BEA table and stage
 
+df_CAGDP = pd.read_csv("_dev/allocativ/hnb_14-11-2020/release_2020/BEA/CAGDP/BEA_2018_CAGDP_full.csv") # Export df as csv
+df_CAINC = pd.read_csv("_dev/allocativ/hnb_14-11-2020/release_2020/BEA/CAINC/BEA_2018_CAINC_full.csv") # Export df as csv
+
 ### Join CAGDP CAINC
 df_join = pd.merge(df_CAINC, df_CAGDP, on = "FIPS", how = "inner") # Join by column while keeping only items that exist in both, select outer or left for other options
 df_index = df_join.set_index("FIPS") # Set column as index
@@ -161,7 +164,7 @@ df_key = df_key.filter(["FIPS", "ST"]) # Keep only selected columns
 df_BEA = pd.merge(df_BEA, df_key, on = "FIPS", how = "inner") # Join by column while keeping only items that exist in both, select outer or left for other options
 
 ### Export full, percent estimate, and label tables
-df_BEA.to_csv(r"hnb/BEA/2018/BEA_2018_FIPS_full.csv") # Export df as csv
+df_BEA.to_csv(r"_dev/allocativ/hnb_14-11-2020/release_2020/BEA/bea_2018_FIPS_full.csv") # Export df as csv
 
 ### Conenct to database
 con = sqlite3.connect('hnb/_database/HNB.db')

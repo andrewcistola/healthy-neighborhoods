@@ -37,12 +37,14 @@ df_id.to_csv(r"hnb/CMS/CMS_2018_id.csv") # Export df as csv
 ## Conenct Hospital to Area File
 
 ### Import Datasets
-df_area = pd.read_csv("hnb/CMS/AREA/Hospital_Service_Area_File_-_2018.csv", encoding = "ISO-8859-1", low_memory= False) # Import dataset with outcome and ecological variable for each geographical id, all datasets in _data folder in repository
+df_area = pd.read_csv("_dev/allocativ/hnb_14-11-2020/release_2020/CMS/AREA/Hospital_Service_Area_File_-_2018.csv", encoding = "ISO-8859-1", low_memory= False) # Import dataset with outcome and ecological variable for each geographical id, all datasets in _data folder in repository
 
 ### Subset by Zip Codes with Inpatient visits
 df_area = df_area[df_area["TOTAL_DAYS_OF_CARE"] > 0] # Susbet numeric column by condition
 df_area = df_area.filter(["ZIP_CODE", "MEDICARE_PROV_NUM"]) # Keep only selected columns
 df_area = df_area.rename(columns = {"ZIP_CODE": "ZIP", "MEDICARE_PROV_NUM": "Provider ID"}) # Rename multiple columns in place
+
+
 
 ### Convert numeric to character
 df_area['ZIP'] = df_area['ZIP'].astype("str") # Change data type of column in data frame
@@ -58,7 +60,7 @@ df_id.to_sql('CMS_2018_Facility_ID', con = sqlite3.connect('hnb/_database/HNB.db
 
 ############## 19 Oct 2020 HSAF Redo
 
-df_hsaf = pd.read_csv("allocativ/hnb/CMS/AREA/Hospital_Service_Area_File_-_2018.csv") # Import dataset saved as csv in _data folder
+df_hsaf = pd.read_csv("_dev/allocativ/hnb_14-11-2020/release_2020/CMS/AREA/Hospital_Service_Area_File_-_2018.csv") # Import dataset saved as csv in _data folder
 df_hsaf = df_hsaf.drop(columns = ["MEDICARE_PROV_NUM"]) # Drop Unwanted Columns
 df_hsaf = df_hsaf.groupby(["ZIP_CODE"], as_index = False).sum() # Group data by columns and sum
 df_hsaf.head()
@@ -70,25 +72,23 @@ df_hsaf["ZCTA"] = "ZCTA"+ df_hsaf['ZCTA'] # Combine string with column
 df_hsaf = df_hsaf.drop(columns = ["ZIP_CODE"]) # Drop Unwanted Columns
 df_hsaf.head()
 
-df_pop = pd.read_csv("allocativ/hnb/DOH/FL/113_5Y2018/FL_113_ZCTA.csv") # Import dataset saved as csv in _data folder
-df_pop = df_pop.filter(["POPULATION", "ZCTA"]) # Rename data frame
+df_pop = pd.read_csv("_dev/allocativ/hnb_14-11-2020/release_2020/ACS/ACS_DP5Y2018_ZCTA_full.csv") # Import dataset saved as csv in _data folder
+df_pop = df_pop.filter(["DP05_0029PE", "ZCTA"]) # Rename data frame
+df_pop =  df_pop.rename(columns = {"DP05_0029PE": "POP_OVER_65"}) # Rename multiple columns in place
 df_hsaf = pd.merge(df_pop, df_hsaf, on = "ZCTA", how = "inner") # Join by column while keeping only items that exist in both, select outer or left for other options
 df_hsaf.head()
 
 df_hsaf = df_hsaf[df_hsaf['TOTAL_CASES'] > 50] # Susbet numeric column by condition
-df_hsaf = df_hsaf[df_hsaf['POPULATION'] > 1000] # Susbet numeric column by condition
+df_hsaf = df_hsaf[df_hsaf['POP_OVER_65'] > 100] # Susbet numeric column by condition
 
-df_hsaf["TOTAL_DAYS_OF_CARE_R1000"] = df_hsaf['TOTAL_DAYS_OF_CARE'] / df_hsaf["POPULATION"] * 1000 # Combine string with column
-df_hsaf["TOTAL_CHARGES_RPB"] = df_hsaf['TOTAL_CHARGES'] / df_hsaf["POPULATION"] # Combine string with column
-df_hsaf["TOTAL_CASES_R1000"] = df_hsaf['TOTAL_CASES'] / df_hsaf["POPULATION"] * 1000 # Combine string with column
-df_hsaf.head()
-
-df_hsaf = df_hsaf.drop(columns = ["POPULATION", "TOTAL_DAYS_OF_CARE", "TOTAL_CHARGES", "TOTAL_CASES"]) # Drop Unwanted Columns
+df_hsaf["DAYS_per65"] = df_hsaf['TOTAL_DAYS_OF_CARE'] / df_hsaf["POP_OVER_65"] # Combine string with column
+df_hsaf["CHARGES_per65"] = df_hsaf['TOTAL_CHARGES'] / df_hsaf["POP_OVER_65"] # Combine string with column
+df_hsaf["VISITS_per65"] = df_hsaf['TOTAL_CASES'] / df_hsaf["POP_OVER_65"] # Combine string with column
 df_hsaf.head()
 
 df_hsaf.info() # Get class, memory, and column info: names, data types, obs.
 
-df_hsaf.to_csv(r"allocativ/hnb/CMS/CMS_2018_ZCTA_RATE.csv") # Export df as csv
+df_hsaf.to_csv(r"_dev/allocativ/hnb_14-11-2020/release_2020/CMS/ffs_2018_ZCTA.csv") # Export df as csv
 
 
 
