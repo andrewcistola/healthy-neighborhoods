@@ -13,7 +13,7 @@ Centers for Medicare and Medicaid Services - Service Area File for Medicare Fee 
 Health Resource Services Administration - Area Health Resource File<br>
 Centers for Medicare and Medicaid Services - Quality Payment Program<br>
 <br>
-The 2020 release can be accessed by downloading the 'release_2020.zip' file listed under 'Releases'
+The 2020 release can be accessed by downloading the 'hnb_2020.zip' file listed under 'Releases'
 
 ## Repository Contents
 `release_2020` All files included in the 2020 Release<br>
