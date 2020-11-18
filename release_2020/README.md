@@ -45,11 +45,7 @@ Status: Staged from raw data as comma delinated `staged.csv`<br>
 Filename: `qpp_2020_FIPS_staged.csv`
 
 ### Repository contents:
-`FLDOH` Code and raw data for FLDOH<br>
-`USC` Code and raw data for USC<br>
-`HRSA` Code and raw data for HRSA<br>
-`CMS` Code and raw data for CMS<br>
-`SHAPE` Shape and crosswalk files for standard geographies and labels<br>
+`shape` Shape files for standard geographies<br>
 `labels` Feature lables for selected tables
 `acs_5Y2018_ZCTA_staged.csv` ACS file ready for use<br>
 `flv_5Y2018_ZCTA_staged.csv` FLV file ready for use<br>
